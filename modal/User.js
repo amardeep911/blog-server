@@ -1,15 +1,31 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
+const jwt = require("jsonwebtoken");
+const userSchema = new Schema(
+  {
     email: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     password: {
-        type: String,
-        required: true
-    }
-}, {timestamps: true})
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', userSchema)
+userSchema.statics.findByJWT = async function (token) {
+  try {
+    var user = this;
+    var decoded = jwt.verify(token, "supersecret");
+    const id = decoded.user;
+    const fetchedUser = user.findOne({ _id: id });
+    if (!fetchedUser) return false;
+    return fetchedUser;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+module.exports = mongoose.model("User", userSchema);
