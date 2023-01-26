@@ -22,6 +22,7 @@ exports.logInHandler = (req, res) => {
     .then((isEqual) => {
       if (!isEqual) {
         console.log("Password did not matched");
+        return;
       }
       const token = jwt.sign(
         {
