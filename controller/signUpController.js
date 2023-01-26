@@ -14,5 +14,4 @@ exports.signUpHandler = (req, res) => {
         message: 'An error occured!'
     }))
 
-
 }
