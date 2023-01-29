@@ -5,9 +5,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-
+const blogRoutes = require("./Routes/Blog.routes");
 const cors = require("cors");
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -21,8 +21,9 @@ app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/blog", blogRoutes);
 app.use("/", (req, res) => {
-  res.send("hlw");
+  res.send("root");
 });
 mongoose.set("strictQuery", false);
 mongoose
