@@ -13,6 +13,10 @@ const BlogSchema = new Schema({
     type: String,
     required: true,
   },
+  blogRawContentData: {
+    type: Object,
+    required: true,
+  },
 });
 BlogSchema.statics.methods = async function findBlogById(id) {
   try {
