@@ -59,7 +59,7 @@ exports.updateBlog = async (req, res) => {
       {
         blogTitle: req.body.data.blogTitle,
         blogContent: req.body.data.blogContent,
-        blogText: "dfjdiof",
+        blogText: req.body.data.blogText,
         blogRawContentData: req.body.data.blogRawContentData,
       }
     );
@@ -68,4 +68,9 @@ exports.updateBlog = async (req, res) => {
   } catch (err) {
     console.log("Blog is not updated");
   }
+};
+exports.deleteBlog = async (req, res) => {
+  const blogId = req.query.blogId;
+  await Blog.deleteOne({ _id: blogId });
+  res.json({ blogId: blogId });
 };
