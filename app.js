@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const blogRoutes = require("./Routes/Blog.routes");
 const cors = require("cors");
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-
+//to parse
 app.use(bodyParser.json());
 app.use(cookieParser());
 
